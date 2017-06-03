@@ -1,0 +1,49 @@
+version: '2'
+services:
+
+# ELASTICSEARCH
+  esnode:
+    image: elasticsearch
+    restart: always
+    environment:
+      - ES_JAVA_OPTS=-Xmx1g -Xms1g
+      - TZ=Asia/Ho_Chi_Minh
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - %BASEDIR%/es/config:/usr/share/elasticsearch/config
+      - %BASEDIR%/es/data:/usr/share/elasticsearch/data
+    container_name: %CONF_INSTANCEPREFIX%-esnode
+
+# KIBANA
+  kibana:
+    image: kibana
+    restart: always
+    environment:
+      - ELASTICSEARCH_URL=http://%CONF_INSTANCEPREFIX%-esnode:9200
+      - TZ=Asia/Ho_Chi_Minh
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    container_name: %CONF_INSTANCEPREFIX%-kibana
+    depends_on:
+      - esnode
+    links:
+      - esnode
+
+# NGINX
+  nginx:
+    image: nginx
+    restart: always
+    container_name: %CONF_INSTANCEPREFIX%-nginx
+    ports:
+      - %CONF_ESPORT%:%CONF_ESPORT%
+      - %CONF_KIPORT%:%CONF_KIPORT%
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - %BASEDIR%/nginx/:/etc/nginx/conf.d/
+      - %BASEDIR%/nginx/:/var/log/nginx
+    depends_on:
+      - esnode
+      - kibana
+    links:
+      - kibana
+      - esnode
