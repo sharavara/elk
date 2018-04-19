@@ -1,0 +1,7 @@
+filebeat.modules:
+- module: nginx
+filebeat.shutdown_timeout: 5s
+output.elasticsearch:
+  hosts: ["http://abc-esnode:9200"]
+setup.kibana.host: "abc-kibana:5601"
+setup.dashboards.enabled: true

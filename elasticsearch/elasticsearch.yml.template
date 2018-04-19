@@ -1,0 +1,4 @@
+node.name: "%CONF_INSTANCEPREFIX%-node"
+network.bind_host: %CONF_INSTANCEPREFIX%-esnode
+network.publish_host: %CONF_INSTANCEPREFIX%-esnode
+discovery.zen.minimum_master_nodes: 1

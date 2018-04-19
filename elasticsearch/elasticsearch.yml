@@ -1,3 +1,0 @@
-node.name: "%CONF_INSTANCEPREFIX%-node"
-network.bind_host: %CONF_INSTANCEPREFIX%-esnode
-network.publish_host: %CONF_INSTANCEPREFIX%-esnode
