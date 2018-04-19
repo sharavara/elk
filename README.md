@@ -2,12 +2,17 @@
 
 ## Architecture
 
-This is a very simple configuration for Elasticsearch and Kibana with a basic authentication
+This is a very simple configuration of Elasticsearch and Kibana with a basic authentication
 
 ![architecture](./images/ELK.png)
 
 **Elasticsearch version:** elasticsearch-oss:6.2.3
+
 **Kibana version:** kibana-oss:6.2.3
+
+Also the script can create an additional instance of `Filebeat` to collect logs from `nginx` server
+
+![architecture](./images/ELK-FB.png)
 
 ## Preconfiguration
 
