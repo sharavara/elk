@@ -1,4 +1,8 @@
 version: '2'
+
+networks:
+  %CONF_INSTANCEPREFIX%-esnet:
+
 services:
 
 # ELASTICSEARCH
@@ -49,25 +53,3 @@ services:
     links:
       - kibana
       - esnode
-
-# FILEBEAT
-  filebeat:
-    image: docker.elastic.co/beats/filebeat:6.2.4
-    restart: always
-    container_name: %CONF_INSTANCEPREFIX%-filebeat
-    volumes:
-      - %BASEDIR%/fb/filebeat.yml:/usr/share/filebeat/filebeat.yml
-      - %BASEDIR%/nginx/:/var/log/nginx
-    networks:
-      - %CONF_INSTANCEPREFIX%-esnet      
-    depends_on:
-      - esnode
-      - kibana
-      - nginx
-    links:
-      - nginx
-      - esnode
-      - kibana
-
-networks:
-  %CONF_INSTANCEPREFIX%-esnet:
