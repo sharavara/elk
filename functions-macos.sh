@@ -6,7 +6,7 @@
 function create_filebeat(){
   if [ $1 != true ]
   then
-    exit 0
+    return 0
   fi
 
   echo "Create filebeat configuration..."
